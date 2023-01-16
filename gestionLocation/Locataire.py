@@ -1,5 +1,22 @@
-class Locataire:
+class Registre:
+    def __init__(self, nom_agence, nb_clients):
+        # instance variable unique to each instance
+        self.nom_agence = nom_agence
+        self.nb_clients = nb_clients
+        self.clients = []
 
+    def subscribe(self, client):
+        self.nb_clients = self.nb_clients + 1
+        self.clients.append(client)
+        return
+
+    def is_subscribe(self, client):
+        if client in self.clients:
+            return True
+        else:
+            return False
+
+class Locataire:
 
     def __init__(self, nom, prenom, civilite, revenu_mens):
         # instance variable unique to each instance
@@ -33,3 +50,6 @@ class Locataire:
 
     def set_revenu_mens(self, revenu_mens):
         self.revenu_mens = revenu_mens
+
+    def subscribe(self, registre : Registre):
+        return registre.is_subscribe(self)
